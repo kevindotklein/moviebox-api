@@ -7,7 +7,14 @@ import lombok.Getter;
 @Getter
 public enum Genre {
     HORROR("HORROR"),
-    ROMANCE("ROMANCE");
+    ROMANCE("ROMANCE"),
+    ACTION("ACTION"),
+    ADVENTURE("ADVENTURE"),
+    ANIMATION("ANIMATION"),
+    DOCUMENTARY("DOCUMENTARY"),
+    DRAMA("DRAMA"),
+    FANTASY("FANTASY"),
+    MUSIC("MUSIC");
 
     private final String name;
 }
