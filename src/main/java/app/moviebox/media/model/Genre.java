@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Genre {
-    HORROR("Horror");
+    HORROR("HORROR"),
+    ROMANCE("ROMANCE");
 
     private final String name;
 }

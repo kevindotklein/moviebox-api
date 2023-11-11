@@ -21,7 +21,7 @@ public class Rating {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Media media;
 
-    private String text;
+    private String comment;
     private String stars;
 
     public Rating() {
