@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,21 +26,13 @@ public class GetMoviesService {
     public List<MovieResponse> execute(String genre) {
         List<MovieResponse> response = new ArrayList<>();
 
-        if (genre == null) {
-            for (Media media : mediaRepository.findAll()) {
-                Movie movie = movieRepository.findById(media.getId())
-                        .orElseThrow(() -> new MovieNotFoundException("Movie not found"));
-                response.add(movieMapper.to(media, movie));
-            }
-            return response;
-        }
-
-        for (Media media : mediaRepository.findAllByGenre(Genre.valueOf(genre))) {
-            Movie movie = movieRepository.findById(media.getId())
-                    .orElseThrow(() -> new MovieNotFoundException("Movie not found"));
+        for (Movie movie : movieRepository.findAll()) {
+            Media media = mediaRepository.findById(movie.getId())
+                    .orElseThrow(() -> new MovieNotFoundException("Movie: "+movie.getId()+" not found"));
             response.add(movieMapper.to(media, movie));
         }
-        return response;
+        if (genre == null) return response;
+        return response.stream().filter(m -> m.genre().equals(Genre.valueOf(genre))).collect(Collectors.toList());
 
     }
 
