@@ -22,7 +22,12 @@ public class GetRatingsController {
 
     @GetMapping("/movies/{movieId}/ratings")
     public ResponseEntity<List<RatingResponse>> getMovieRatings(@PathVariable UUID movieId) {
-        return new ResponseEntity<>(getRatingsService.execute(movieId), HttpStatus.OK);
+        return new ResponseEntity<>(getRatingsService.executeMovies(movieId), HttpStatus.OK);
+    }
+
+    @GetMapping("/series/{seriesId}/ratings")
+    public ResponseEntity<List<RatingResponse>> getSeriesRatings(@PathVariable UUID seriesId) {
+        return new ResponseEntity<>(getRatingsService.executeSeries(seriesId), HttpStatus.OK);
     }
 
 }
