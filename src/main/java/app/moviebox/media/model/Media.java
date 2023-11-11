@@ -37,4 +37,14 @@ public class Media {
     public Media() {
         this.id = UUID.randomUUID();
     }
+
+    public Media(String name, String cover, String description, Genre genre, String director, String year) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.cover = cover;
+        this.description = description;
+        this.genre = genre;
+        this.director = director;
+        this.year = year;
+    }
 }

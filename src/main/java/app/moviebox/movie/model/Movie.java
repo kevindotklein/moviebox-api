@@ -26,4 +26,10 @@ public class Movie extends Media {
         super(id, name, cover, description, genre, director, year, ratings);
         this.duration = duration;
     }
+
+    public Movie(String name, String cover, String description,
+                 Genre genre, String director, String year, String duration) {
+        super(name, cover, description, genre, director, year);
+        this.duration = duration;
+    }
 }

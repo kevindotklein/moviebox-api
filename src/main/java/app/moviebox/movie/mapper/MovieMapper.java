@@ -19,4 +19,17 @@ public class MovieMapper {
                 media.getYear(),
                 movie.getDuration());
     }
+
+    public MovieResponse to(Movie movie) {
+        return new MovieResponse(
+                movie.getId(),
+                movie.getName(),
+                movie.getCover(),
+                movie.getDescription(),
+                movie.getGenre(),
+                movie.getDirector(),
+                movie.getYear(),
+                movie.getDuration()
+        );
+    }
 }
