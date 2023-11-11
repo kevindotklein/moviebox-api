@@ -28,4 +28,12 @@ public class Series extends Media {
         this.episodes = episodes;
         this.seasons = seasons;
     }
+
+    public Series(String name, String cover, String description,
+                  Genre genre, String director, String year, String episodes, String seasons) {
+
+        super(name, cover, description, genre, director, year);
+        this.episodes = episodes;
+        this.seasons = seasons;
+    }
 }

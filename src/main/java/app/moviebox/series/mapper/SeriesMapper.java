@@ -20,4 +20,19 @@ public class SeriesMapper {
                 series.getEpisodes(),
                 series.getSeasons());
     }
+
+    public SeriesResponse to(Series series) {
+        return new SeriesResponse(
+                series.getId(),
+                series.getName(),
+                series.getCover(),
+                series.getDescription(),
+                series.getGenre(),
+                series.getDirector(),
+                series.getYear(),
+                series.getEpisodes(),
+                series.getSeasons()
+
+        );
+    }
 }
