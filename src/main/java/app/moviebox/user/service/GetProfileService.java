@@ -1,8 +1,8 @@
 package app.moviebox.user.service;
 
 import app.moviebox.common.exception.UserNotFoundException;
-import app.moviebox.user.dto.RegisterResponse;
-import app.moviebox.user.mapper.RegisterMapper;
+import app.moviebox.user.dto.ProfileResponse;
+import app.moviebox.user.mapper.ProfileMapper;
 import app.moviebox.user.model.User;
 import app.moviebox.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 public class GetProfileService {
 
     private final UserRepository userRepository;
-    private final RegisterMapper registerMapper;
+    private final ProfileMapper profileMapper;
 
-    public RegisterResponse execute(String email) {
+    public ProfileResponse execute(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User: " + email + " not found"));
-        return registerMapper.to(user);
+        return profileMapper.to(user);
     }
 }
