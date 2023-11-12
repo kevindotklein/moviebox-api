@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-@Tag(name = "ratings")
+@Tag(name = "admin")
 public class DeleteRatingController {
 
     private final DeleteRatingService deleteRatingService;
