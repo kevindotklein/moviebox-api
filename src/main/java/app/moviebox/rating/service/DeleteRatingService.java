@@ -7,6 +7,7 @@ import app.moviebox.rating.dto.RatingResponse;
 import app.moviebox.rating.mapper.RatingMapper;
 import app.moviebox.rating.model.Rating;
 import app.moviebox.rating.repository.RatingRepository;
+import app.moviebox.series.repository.SeriesRepository;
 import app.moviebox.user.model.User;
 import app.moviebox.user.model.UserRole;
 import app.moviebox.user.repository.UserRepository;
@@ -23,6 +24,7 @@ public class DeleteRatingService {
     private final RatingRepository ratingRepository;
     private final RatingMapper ratingMapper;
     private final MovieRepository movieRepository;
+    private final SeriesRepository seriesRepository;
 
     public RatingResponse executeMovie(UUID movieId, UUID ratingId, String email) {
 
@@ -37,6 +39,30 @@ public class DeleteRatingService {
 
         if (!rating.getMedia().getId().equals(movieId)) {
             throw new BadRequestException("Rating: "+ratingId+" does not belongs to Movie: "+movieId);
+        }
+
+        if (!user.getRole().equals(UserRole.ADMIN) && !user.getId().equals(rating.getUser().getId())) {
+            throw new ForbiddenAccessException("User: "+email+" does not have permission to access this content");
+        }
+
+        ratingRepository.delete(rating);
+
+        return ratingMapper.to(rating, rating.getUser());
+    }
+
+    public RatingResponse executeSeries(UUID seriesId, UUID ratingId, String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User: "+email+" not found"));
+
+        seriesRepository.findById(seriesId)
+                .orElseThrow(() -> new SeriesNotFoundException("Series: "+seriesId+" not found"));
+
+        Rating rating = ratingRepository.findById(ratingId)
+                .orElseThrow(() -> new RatingNotFoundException("Rating: "+ratingId+" not found"));
+
+        if (!rating.getMedia().getId().equals(seriesId)) {
+            throw new BadRequestException("Rating: "+ratingId+" does not belongs to Series: "+seriesId);
         }
 
         if (!user.getRole().equals(UserRole.ADMIN) && !user.getId().equals(rating.getUser().getId())) {

@@ -29,4 +29,13 @@ public class DeleteRatingController {
         return new ResponseEntity<>(deleteRatingService.executeMovie(movieId, ratingId, principal.getUsername())
                 , HttpStatus.OK);
     }
+
+    @DeleteMapping("/series/{seriesId}/ratings/{ratingId}")
+    public ResponseEntity<RatingResponse> deleteSeriesRating(@PathVariable UUID seriesId,
+                                                            @PathVariable UUID ratingId,
+                                                            Authentication auth) {
+        UserDetails principal = (UserDetails) auth.getPrincipal();
+        return new ResponseEntity<>(deleteRatingService.executeSeries(seriesId, ratingId, principal.getUsername())
+                , HttpStatus.OK);
+    }
 }
