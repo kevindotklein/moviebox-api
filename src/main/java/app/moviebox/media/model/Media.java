@@ -31,7 +31,7 @@ public class Media {
 
     private String year;
 
-    @OneToMany(mappedBy = "media", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "media", fetch = FetchType.EAGER)
     private List<Rating> ratings;
 
     public Media() {
