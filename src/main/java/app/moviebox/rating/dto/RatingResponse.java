@@ -7,5 +7,5 @@ public record RatingResponse(UUID id,
                              String comment,
                              String stars,
                              Instant createdAt,
-                             UUID userId) {
+                             String user) {
 }

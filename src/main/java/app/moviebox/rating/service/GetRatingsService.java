@@ -33,7 +33,7 @@ public class GetRatingsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User: "+email+" not found"));
 
-        return ratingMapper.to(movie.getRatings(), user.getId());
+        return ratingMapper.to(movie.getRatings(), user.getFullName());
     }
 
     public List<RatingResponse> executeSeries(UUID seriesId, String email) {
@@ -43,7 +43,7 @@ public class GetRatingsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User: "+email+" not found"));
 
-        return ratingMapper.to(series.getRatings(), user.getId());
+        return ratingMapper.to(series.getRatings(), user.getFullName());
     }
 
 }

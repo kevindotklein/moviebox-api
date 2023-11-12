@@ -11,7 +11,7 @@ import java.util.UUID;
 @Component
 public class RatingMapper {
 
-    public List<RatingResponse> to(List<Rating> ratings, UUID userId) {
+    public List<RatingResponse> to(List<Rating> ratings, String user) {
         List<RatingResponse> response = new ArrayList<>();
         for(Rating r : ratings) {
             response.add(new RatingResponse(
@@ -19,19 +19,19 @@ public class RatingMapper {
                     r.getComment(),
                     r.getStars(),
                     r.getCreatedAt(),
-                    userId
+                    user
             ));
         }
         return response;
     }
 
-    public RatingResponse to(Rating rating, UUID userId) {
+    public RatingResponse to(Rating rating, String user) {
         return new RatingResponse(
                 rating.getId(),
                 rating.getComment(),
                 rating.getStars(),
                 rating.getCreatedAt(),
-                userId
+                user
         );
     }
 
