@@ -6,6 +6,7 @@ import app.moviebox.user.dto.RegisterRequest;
 import app.moviebox.user.dto.RegisterResponse;
 import app.moviebox.user.service.LoginService;
 import app.moviebox.user.service.RegisterService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Tag(name = "auth")
 public class AuthController {
 
     private final LoginService loginService;

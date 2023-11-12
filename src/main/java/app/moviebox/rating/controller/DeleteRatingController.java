@@ -2,6 +2,9 @@ package app.moviebox.rating.controller;
 
 import app.moviebox.rating.dto.RatingResponse;
 import app.moviebox.rating.service.DeleteRatingService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Tag(name = "ratings")
 public class DeleteRatingController {
 
     private final DeleteRatingService deleteRatingService;
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/movies/{movieId}/ratings/{ratingId}")
     public ResponseEntity<RatingResponse> deleteMovieRating(@PathVariable UUID movieId,
                                                             @PathVariable UUID ratingId,
@@ -30,6 +35,7 @@ public class DeleteRatingController {
                 , HttpStatus.OK);
     }
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/series/{seriesId}/ratings/{ratingId}")
     public ResponseEntity<RatingResponse> deleteSeriesRating(@PathVariable UUID seriesId,
                                                             @PathVariable UUID ratingId,

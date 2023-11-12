@@ -2,6 +2,9 @@ package app.moviebox.rating.controller;
 
 import app.moviebox.rating.dto.RatingResponse;
 import app.moviebox.rating.service.GetRatingsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Tag(name = "ratings")
 public class GetRatingsController {
 
     private final GetRatingsService getRatingsService;
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/movies/{movieId}/ratings")
     public ResponseEntity<List<RatingResponse>> getMovieRatings(@PathVariable UUID movieId,
                                                                 Authentication auth) {
@@ -29,6 +34,7 @@ public class GetRatingsController {
         return new ResponseEntity<>(getRatingsService.executeMovies(movieId, principal.getUsername()), HttpStatus.OK);
     }
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/series/{seriesId}/ratings")
     public ResponseEntity<List<RatingResponse>> getSeriesRatings(@PathVariable UUID seriesId,
                                                                  Authentication auth) {

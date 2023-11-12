@@ -3,6 +3,9 @@ package app.moviebox.series.controller;
 import app.moviebox.series.dto.SeriesRequest;
 import app.moviebox.series.dto.SeriesResponse;
 import app.moviebox.series.service.UpdateSeriesService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,10 +19,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/series")
 @RequiredArgsConstructor
+@Tag(name = "series")
 public class UpdateSeriesController {
 
     private final UpdateSeriesService updateSeriesService;
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @PutMapping("/{seriesId}")
     public ResponseEntity<SeriesResponse> updateSeries(@PathVariable UUID seriesId,
                                                        @RequestBody @Valid SeriesRequest request,

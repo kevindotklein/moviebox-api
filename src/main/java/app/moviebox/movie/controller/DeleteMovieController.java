@@ -2,6 +2,9 @@ package app.moviebox.movie.controller;
 
 import app.moviebox.movie.dto.MovieResponse;
 import app.moviebox.movie.service.DeleteMovieService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/movies")
 @RequiredArgsConstructor
+@Tag(name = "movies")
 public class DeleteMovieController {
 
     private final DeleteMovieService deleteMovieService;
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/{movieId}")
     public ResponseEntity<MovieResponse> deleteMovie(@PathVariable UUID movieId,
                                                      Authentication auth) {
