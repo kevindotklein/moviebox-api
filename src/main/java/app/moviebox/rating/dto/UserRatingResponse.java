@@ -13,5 +13,7 @@ public record UserRatingResponse(UUID id,
                                  Instant createdAt,
                                  String user,
                                  UUID userId,
-                                 MediaType mediaType) {
+                                 MediaType mediaType,
+                                 String media,
+                                 UUID mediaId) {
 }

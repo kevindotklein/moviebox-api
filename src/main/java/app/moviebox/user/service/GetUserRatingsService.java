@@ -36,9 +36,9 @@ public class GetUserRatingsService {
 
         for (Rating r : user.getRatings()) {
             Optional<Movie> movie = movieRepository.findById(r.getMedia().getId());
-            movie.ifPresent(m -> response.add(userRatingMapper.to(r, user, MediaType.MOVIE)));
+            movie.ifPresent(m -> response.add(userRatingMapper.to(r, user, MediaType.MOVIE, m.getName(), m.getId())));
             Optional<Series> series = seriesRepository.findById(r.getMedia().getId());
-            series.ifPresent(s -> response.add(userRatingMapper.to(r, user, MediaType.SERIES)));
+            series.ifPresent(s -> response.add(userRatingMapper.to(r, user, MediaType.SERIES, s.getName(), s.getId())));
         }
 
         return response;

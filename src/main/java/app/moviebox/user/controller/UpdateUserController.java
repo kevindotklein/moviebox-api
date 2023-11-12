@@ -1,7 +1,7 @@
 package app.moviebox.user.controller;
 
 import app.moviebox.user.dto.ProfileResponse;
-import app.moviebox.user.dto.RegisterRequest;
+import app.moviebox.user.dto.UpdateProfileRequest;
 import app.moviebox.user.service.UpdateUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-@Tag(name = "admin")
+@Tag(name = "user")
 public class UpdateUserController {
 
     private final UpdateUserService updateUserService;
@@ -27,7 +27,7 @@ public class UpdateUserController {
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @PutMapping("/users/{userId}")
     public ResponseEntity<ProfileResponse> updateUser(@PathVariable UUID userId,
-                                                      @RequestBody @Valid RegisterRequest request,
+                                                      @RequestBody @Valid UpdateProfileRequest request,
                                                       Authentication auth) {
         UserDetails principal = (UserDetails) auth.getPrincipal();
         return new ResponseEntity<>(updateUserService.execute(userId, request, principal.getUsername()), HttpStatus.OK);
