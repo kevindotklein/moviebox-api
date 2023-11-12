@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -24,9 +25,11 @@ public class Rating {
 
     private String comment;
     private String stars;
+    private Instant createdAt;
 
     public Rating() {
         this.id = UUID.randomUUID();
+        this.createdAt = Instant.now();
     }
 
     public Rating(String comment, String stars, Media media) {
@@ -34,5 +37,6 @@ public class Rating {
         this.comment = comment;
         this.stars = stars;
         this.media = media;
+        this.createdAt = Instant.now();
     }
 }
