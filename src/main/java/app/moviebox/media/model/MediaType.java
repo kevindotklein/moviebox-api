@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum MediaType {
-    MOVIE("MOVIE"),
-    SERIES("SERIES");
+    movie("movie"),
+    series("series");
 
     private final String name;
 }
