@@ -10,8 +10,6 @@ import app.moviebox.rating.mapper.RatingMapper;
 import app.moviebox.rating.model.Rating;
 import app.moviebox.series.model.Series;
 import app.moviebox.series.repository.SeriesRepository;
-import app.moviebox.user.model.User;
-import app.moviebox.user.model.UserRole;
 import app.moviebox.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
