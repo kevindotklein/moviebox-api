@@ -2,6 +2,9 @@ package app.moviebox.user.controller;
 
 import app.moviebox.rating.dto.AllRatingsResponse;
 import app.moviebox.user.service.GetAllRatingsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/all/ratings")
 @RequiredArgsConstructor
+@Tag(name = "admin")
 public class AllRatingsController {
 
     private final GetAllRatingsService getAllRatingsService;
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping
     public ResponseEntity<List<AllRatingsResponse>> getAll(Authentication auth) {
         UserDetails principal = (UserDetails) auth.getPrincipal();

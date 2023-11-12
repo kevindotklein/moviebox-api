@@ -2,6 +2,9 @@ package app.moviebox.user.controller;
 
 import app.moviebox.user.dto.ProfileResponse;
 import app.moviebox.user.service.DeleteUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Tag(name = "admin")
 public class DeleteUserController {
 
     private final DeleteUserService deleteUserService;
 
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/users/{userId}")
     public ResponseEntity<ProfileResponse> deleteUser(@PathVariable UUID userId,
                                                       Authentication auth) {
