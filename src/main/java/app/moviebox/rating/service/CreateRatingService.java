@@ -48,7 +48,7 @@ public class CreateRatingService {
                 media
         );
 
-        return ratingMapper.to(ratingRepository.save(rating), user.getFullName());
+        return ratingMapper.to(ratingRepository.save(rating), user);
     }
 
     public RatingResponse executeSeries(UUID seriesId, RatingRequest request, String email) {
@@ -68,7 +68,7 @@ public class CreateRatingService {
                 media
         );
 
-        return ratingMapper.to(ratingRepository.save(rating), user.getFullName());
+        return ratingMapper.to(ratingRepository.save(rating), user);
     }
 
 }
