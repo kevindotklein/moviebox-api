@@ -1,6 +1,6 @@
 package app.moviebox.user.controller;
 
-import app.moviebox.rating.dto.AllRatingsResponse;
+import app.moviebox.rating.dto.AdminRatingsResponse;
 import app.moviebox.user.service.GetAllRatingsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -26,7 +26,7 @@ public class AllRatingsController {
 
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping
-    public ResponseEntity<List<AllRatingsResponse>> getAll(Authentication auth) {
+    public ResponseEntity<List<AdminRatingsResponse>> getAll(Authentication auth) {
         UserDetails principal = (UserDetails) auth.getPrincipal();
         return new ResponseEntity<>(getAllRatingsService.execute(principal.getUsername()), HttpStatus.OK);
     }
