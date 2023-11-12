@@ -33,46 +33,34 @@ public class GetRatingsService {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new MovieNotFoundException("Movie: "+movieId+" not found"));
 
-        User user = userRepository.findByEmail(email)
+        userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User: "+email+" not found"));
 
-        if (user.getRole().equals(UserRole.ADMIN)) {
-            List<RatingResponse> ratings = new ArrayList<>();
-            for (Rating r : movie.getRatings()) {
-                ratings.add(ratingMapper.to(r, userRepository.findById(r.getUser().getId()).orElseThrow(
-                        () -> new UserNotFoundException("User: "+r.getUser().getId().toString()+" not found")))
-                );
-            }
-            return ratings;
+
+        List<RatingResponse> ratings = new ArrayList<>();
+        for (Rating r : movie.getRatings()) {
+            ratings.add(ratingMapper.to(r, userRepository.findById(r.getUser().getId()).orElseThrow(
+                    () -> new UserNotFoundException("User: "+r.getUser().getId().toString()+" not found")))
+            );
         }
+        return ratings;
 
-        List<Rating> ratings =
-                movie.getRatings().stream().filter(r -> r.getUser().getId().equals(user.getId())).toList();
-
-        return ratingMapper.to(ratings, ratings.isEmpty() ? null : ratings.get(0).getUser());
     }
 
     public List<RatingResponse> executeSeries(UUID seriesId, String email) {
         Series series = seriesRepository.findById(seriesId)
                 .orElseThrow(() -> new SeriesNotFoundException("Series: "+seriesId+" not found"));
 
-        User user = userRepository.findByEmail(email)
+        userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User: "+email+" not found"));
 
-        if (user.getRole().equals(UserRole.ADMIN)) {
-            List<RatingResponse> ratings = new ArrayList<>();
-            for (Rating r : series.getRatings()) {
-                ratings.add(ratingMapper.to(r, userRepository.findById(r.getUser().getId()).orElseThrow(
-                        () -> new UserNotFoundException("User: "+r.getUser().getId().toString()+" not found")))
-                );
-            }
-            return ratings;
+        List<RatingResponse> ratings = new ArrayList<>();
+        for (Rating r : series.getRatings()) {
+            ratings.add(ratingMapper.to(r, userRepository.findById(r.getUser().getId()).orElseThrow(
+                    () -> new UserNotFoundException("User: "+r.getUser().getId().toString()+" not found")))
+            );
         }
-
-        List<Rating> ratings =
-                series.getRatings().stream().filter(r -> r.getUser().getId().equals(user.getId())).toList();
-
-        return ratingMapper.to(ratings, ratings.isEmpty() ? null : ratings.get(0).getUser());
+        return ratings;
     }
 
 }
