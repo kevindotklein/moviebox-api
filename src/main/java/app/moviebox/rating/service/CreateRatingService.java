@@ -45,7 +45,8 @@ public class CreateRatingService {
         Rating rating = new Rating(
                 request.comment(),
                 request.stars(),
-                media
+                media,
+                user
         );
 
         return ratingMapper.to(ratingRepository.save(rating), user);
@@ -65,7 +66,8 @@ public class CreateRatingService {
         Rating rating = new Rating(
                 request.comment(),
                 request.stars(),
-                media
+                media,
+                user
         );
 
         return ratingMapper.to(ratingRepository.save(rating), user);

@@ -1,5 +1,6 @@
 package app.moviebox.user.model;
 
+import app.moviebox.rating.model.Rating;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +33,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 
     public User() {
         this.id = UUID.randomUUID();

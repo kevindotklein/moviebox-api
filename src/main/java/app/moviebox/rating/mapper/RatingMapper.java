@@ -14,15 +14,17 @@ public class RatingMapper {
 
     public List<RatingResponse> to(List<Rating> ratings, User user) {
         List<RatingResponse> response = new ArrayList<>();
-        for(Rating r : ratings) {
-            response.add(new RatingResponse(
-                    r.getId(),
-                    r.getComment(),
-                    r.getStars(),
-                    r.getCreatedAt(),
-                    user.getFullName(),
-                    user.getId()
-            ));
+        if (user != null) {
+            for (Rating r : ratings) {
+                response.add(new RatingResponse(
+                        r.getId(),
+                        r.getComment(),
+                        r.getStars(),
+                        r.getCreatedAt(),
+                        user.getFullName(),
+                        user.getId()
+                ));
+            }
         }
         return response;
     }
