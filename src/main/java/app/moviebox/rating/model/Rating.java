@@ -27,7 +27,7 @@ public class Rating {
     private String stars;
     private Instant createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private User user;
 
     public Rating() {
