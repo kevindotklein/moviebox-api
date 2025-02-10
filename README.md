@@ -1,10 +1,3 @@
-# dependencies / dependencias:
-
-```
-postgres:
-create a database named "moviebox" / crie um banco chamado "moviebox"
-```
-
 # in order to run / para rodar:
 
 ```
